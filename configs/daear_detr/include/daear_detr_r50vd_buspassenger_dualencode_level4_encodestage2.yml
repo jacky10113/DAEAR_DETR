@@ -1,0 +1,102 @@
+task: detection
+
+model: RTDETR
+criterion: SetCriterion
+postprocessor: RTDETRPostProcessor
+
+
+RTDETR: 
+  backbone: PResNet
+  encoder: HybridEncoder
+  decoder: RTDETRTransformer
+  multi_scale: [480, 512, 544, 576, 608, 640, 640, 640, 672, 704, 736, 768, 800,960]
+  #multi_scale: [960]
+
+PResNet:
+  depth: 50
+  variant: d
+  freeze_at: 0
+  return_idx: [0, 1, 2, 3]
+  num_stages: 4
+  freeze_norm: True
+  pretrained: True 
+
+#本配置文件为level4，即处理backbone4个阶段的所有输出，encodestage=2意思是将backbone的第2层输出以及最后一层输出进行注意力运算,user_encode_index=1
+HybridEncoder:
+  in_channels: [256, 512, 1024, 2048]
+  feat_strides: [4, 8, 16, 32]
+
+  # intra
+  hidden_dim: 256
+  use_encoder_idx: [3]
+  num_encoder_layers: 1
+  nhead: 8
+  dim_feedforward: 1024
+  dropout: 0.
+  enc_act: 'gelu'
+  pe_temperature: 10000
+  
+  # cross
+  expansion: 1.0
+  depth_mult: 1
+  act: 'silu'
+
+  # eval
+  eval_spatial_size: [960, 960]
+
+  #dual focus 编码器和解码器中的配置需要相同
+  dual_focus: True
+  #use_encoder_firstidx指定处理backbone4个阶段的输出从哪个阶段开始,0表示从第1阶段开始，1表示从第2阶段的输出开始处理，丢弃第1阶段的输出
+  use_encoder_firstidx: 0
+  #use_encoder_index指定第1个自注意模块处理backbone哪个阶段的输出特征图，1表示的backbone第2阶段的输出特征图进行拆窗并自注意力运算。如果use_encoder_index<use_encoder_firstidx，则第1个自注意模块处理use_encoder_firstidx对应backbone阶段输出特征图
+  use_encoder_index: 1
+
+  #residual
+  attention_residual: False
+
+  #gated mechanism
+  FFN_Gated: False
+  Attention_Gated: False
+  
+
+
+RTDETRTransformer:
+  feat_channels: [256, 256, 256, 256]
+  feat_strides: [4, 8, 16, 32]
+  hidden_dim: 256
+  #num_levels至关重要，是实际参与编码器运算的feature map数量，需要与use_encoder_idx和use_encoder_firstidx契合
+  num_levels: 4
+
+  num_queries: 300
+
+  num_decoder_layers: 6
+  num_denoising: 100
+  
+  eval_idx: -1
+  eval_spatial_size: [960, 960]
+
+  #dual focus 编码器和解码器中的配置需要相同,use_encoder_firstidx指定进行编码解码的features的启始index
+  use_encoder_firstidx: 0
+
+
+use_focal_loss: True
+
+RTDETRPostProcessor:
+  num_top_queries: 300
+
+
+SetCriterion:
+  weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2,}
+  losses: ['vfl', 'boxes', ]
+  alpha: 0.75
+  gamma: 2.0
+
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 2}
+    # use_focal_loss: True 
+    alpha: 0.25
+    gamma: 2.0
+
+
+

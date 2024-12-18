@@ -1,0 +1,43 @@
+
+use_ema: True 
+ema:
+  type: ModelEMA
+
+  #decay: 0.9999 #caltech pedestrian interval30
+  decay: 0.999 #caltech pedestrian interval3
+  warmups: 2000
+
+
+find_unused_parameters: True 
+
+epoches: 12
+clip_max_norm: 0.1
+
+optimizer:
+  type: AdamW
+  params: 
+    - 
+      params: 'backbone'
+      #lr: 0.00001 #caltech pedestrian interval30
+      lr: 0.00002 #caltech pedestrian interval3
+    - 
+      params: '^(?=.*encoder(?=.*bias|.*norm.*weight)).*$'
+      weight_decay: 0.
+    -
+      params: '^(?=.*decoder(?=.*bias|.*norm.*weight)).*$'
+      weight_decay: 0.
+
+  #lr: 0.0001 #caltech pedestrian interval30
+  lr: 0.0002 #caltech pedestrian interval3
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+
+lr_scheduler:
+  type: MultiStepLR
+  #interval30的时候的设置
+  #milestones: [1000]
+  #interval=3,epochs=72,batchsize=8的时候的设置
+  milestones: [128352, 256704, 385056]
+  gamma: 0.1
+

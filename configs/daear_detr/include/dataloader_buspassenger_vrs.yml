@@ -1,0 +1,56 @@
+# num_classes: 91
+# remap_mscoco_category: True
+
+train_dataloader: 
+  dataset: 
+    return_masks: False
+    transforms:
+      ops:
+        - {type: MosaicTransform,input_size: [960, 576],p: 0.3}
+        - {type: CutMixTransform,input_size: [960, 576], p: 0.2}
+        - {type: MixUpTransform,input_size: [960, 576], p: 0.2, alpha: 0.4}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: RandomHorizontalFlip, p: 0.5}
+        - {type: Resize, size: [960, 960]}
+        #- {type: PadToSize, spatial_size: [960, 960], padding_mode: 'constant', fill: 0}
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: ConvertBox, out_fmt: 'cxcywh', normalize: True}
+  shuffle: True
+  batch_size: 4
+  num_workers: 4
+  collate_fn: enhanced_collate_fn
+
+
+val_dataloader:
+  dataset: 
+    transforms:
+      ops: 
+        - {type: Resize, size: [960, 960]}
+        #- {type: PadToSize, spatial_size: [960, 960], padding_mode: 'constant', fill: 0}
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+  shuffle: False
+  batch_size: 4
+  num_workers: 4
+  collate_fn: default_collate_fn
+
+
+
+test_dataloader:
+  dataset: 
+    transforms:
+      ops: 
+        # - {type: Resize, size: 639, max_size: 640}
+        # - {type: PadToSize, spatial_size: 640}
+        - {type: Resize, size: [960, 960]}
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+  shuffle: False
+  batch_size: 4
+  num_workers: 4
+  collate_fn: default_collate_fn

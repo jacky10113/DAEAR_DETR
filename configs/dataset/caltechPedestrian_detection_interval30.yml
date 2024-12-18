@@ -1,0 +1,49 @@
+task: detection
+
+num_classes: 1
+remap_mscoco_category: True
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: CaltechPedestrianDetection
+    img_folder: ../datasets/pedestrainDatasets/CaltechPedestrian/interval30/images/train/
+    ann_file: ../datasets/pedestrainDatasets/CaltechPedestrian/interval30/train_seg.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 5
+  num_workers: 2
+  drop_last: True 
+ 
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CaltechPedestrianDetection
+    img_folder: ../datasets/pedestrainDatasets/CaltechPedestrian/interval30/images/test/
+    ann_file: ../datasets/pedestrainDatasets/CaltechPedestrian/interval30/test_seg.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 5
+  num_workers: 2
+  drop_last: False
+
+test_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CaltechPedestrianDetection
+    img_folder: ../datasets/pedestrainDatasets/CaltechPedestrian/interval30/images/test/
+    ann_file: ../datasets/pedestrainDatasets/CaltechPedestrian/interval30/test_seg.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 5
+  num_workers: 2
+  drop_last: False

@@ -1,0 +1,13 @@
+__include__: [
+  '../dataset/caltechPedestrian_detection_interval30.yml',
+  '../runtime.yml',
+  './include/dataloader_caltechPedestrian.yml',
+  './include/optimizer.yml',
+  './include/daear_detr_r50vd_caltechPedestrian_dualencode_level4_encodestage2_residual_AttentionGated.yml',
+]
+log_step: 100
+epoches: 72
+checkpoint_step: 1
+
+
+output_dir: ../models_trained/object_detection/daear_detr/caltechPedestrian/interval30/daear_detr_dualencode_level4_encodestage2_residual_AttentionGated_r50vd_6x_caltechPedestrian/

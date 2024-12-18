@@ -1,0 +1,11 @@
+__include__: [
+  '../dataset/buspassenger_detection.yml',
+  '../runtime.yml',
+  './include/dataloader_buspassenger.yml',
+  './include/optimizer.yml',
+  './include/daear_detr_r50vd_buspassenger_dualencode_level4_encodestage3_residual_AttentionGated.yml',
+]
+log_step: 100
+epoches: 72
+checkpoint_step: 12
+output_dir: ../models_trained/object_detection/daear_detr/buspassenger/daear_detr_dualencode_level4_encodestage3_residual_AttentionGated_r50vd_6x_buspassenger_random/

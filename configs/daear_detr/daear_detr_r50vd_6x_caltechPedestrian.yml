@@ -1,0 +1,11 @@
+__include__: [
+  '../dataset/caltechPedestrian_detection.yml',
+  '../runtime.yml',
+  './include/dataloader_caltechPedestrian.yml',
+  './include/optimizer.yml',
+  './include/daear_detr_r50vd_caltechPedestrian.yml',
+]
+log_step: 100
+epoches: 72
+checkpoint_step: 36
+output_dir: ../models_trained/object_detection/daear_detr/caltechPedestrian/daear_detr_r50vd_6x_caltechPedestrian/202409060951

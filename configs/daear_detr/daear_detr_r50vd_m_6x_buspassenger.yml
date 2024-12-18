@@ -1,0 +1,16 @@
+__include__: [
+  '../dataset/buspassenger_detection.yml',
+  '../runtime.yml',
+  './include/dataloader.yml',
+  './include/optimizer.yml',
+  './include/daear_detr_r50vd.yml',
+]
+
+output_dir: ../models_trained/object_detectionoutput/daear_detr/buspassenger/daear_detr_r50vd_m_6x_coco/buspassenger_random/202303131600
+
+
+HybridEncoder:
+  expansion: 0.5
+
+RTDETRTransformer:
+  eval_idx: 2 # use 3th decoder layer to eval

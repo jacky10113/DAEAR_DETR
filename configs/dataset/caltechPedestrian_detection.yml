@@ -1,0 +1,48 @@
+task: detection
+
+num_classes: 1
+remap_mscoco_category: True
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: CaltechPedestrianDetection
+    img_folder: ../datasets/PedestrianDatasets/Caltech/interval2/intervalExtract/train_images/
+    ann_file: ../datasets/PedestrianDatasets/CaltechPedestrian/interval2/caltechPedestrain_train_interval2_newanno.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 5
+  num_workers: 2
+  drop_last: True 
+ 
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CaltechPedestrianDetection
+    img_folder: /public/home/houjie/video_structure/buspassenger_detection/datasets/PedestrianDatasets/CaltechPedestrian/interval30/images/test/
+    ann_file: /public/home/houjie/video_structure/buspassenger_detection/datasets/PedestrianDatasets/CaltechPedestrian/interval30/test_seg.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 5
+  num_workers: 2
+  drop_last: False
+
+test_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CaltechPedestrianDetection
+    img_folder: /public/home/houjie/video_structure/buspassenger_detection/datasets/PedestrianDatasets/CaltechPedestrian/interval30/images/test/
+    ann_file: /public/home/houjie/video_structure/buspassenger_detection/datasets/PedestrianDatasets/CaltechPedestrian/interval30/test_seg.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 5
+  num_workers: 2
+  drop_last: False

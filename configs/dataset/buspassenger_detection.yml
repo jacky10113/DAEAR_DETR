@@ -1,0 +1,49 @@
+task: detection
+
+num_classes: 1
+remap_mscoco_category: True
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: BuspassengerDetection
+    img_folder: ../datasets/BusPassenger/buspassenger_random/train_images/
+    ann_file: ../datasets/BusPassenger/buspassenger_random/train_seg.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 4
+  num_workers: 4
+  drop_last: True 
+
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: BuspassengerDetection
+    img_folder: ../datasets/BusPassenger/buspassenger_random/val_images/
+    ann_file: ../datasets/BusPassenger/buspassenger_random/val_seg.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 4
+  num_workers: 4
+  drop_last: False
+
+test_dataloader:
+  type: DataLoader
+  dataset: 
+    type: BuspassengerDetection
+    img_folder: ../datasets/BusPassenger/buspassenger_random/test_images/
+    ann_file: ../datasets/BusPassenger/buspassenger_random/test_seg.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 4
+  num_workers: 4
+  drop_last: False

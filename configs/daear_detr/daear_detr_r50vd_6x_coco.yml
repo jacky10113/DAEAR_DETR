@@ -1,0 +1,11 @@
+__include__: [
+  '../dataset/coco_detection.yml',
+  '../runtime.yml',
+  './include/dataloader.yml',
+  './include/optimizer.yml',
+  './include/daear_detr_r50vd.yml',
+]
+log_step: 100
+epoches: 72
+checkpoint_step: 6
+output_dir: ../models_trained/object_detection/daear_detr/buspassenger/daear_detr_r50vd_6x_coco/202303152210
