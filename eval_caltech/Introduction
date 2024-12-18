@@ -1,0 +1,9 @@
+1.添加
+git remote add origin1 https://github.com/jacky10113/Caltech_Pedestrian_Test.git
+
+2.提交到github(https://github.com/jacky10113/Caltech_Pedestrian_Test.git)
+  git push -u origin1 master
+3.提交到gitlab(https://gitlab.yhwy.xyz/jiehou/caltechpedestriantest.git)
+  git push -u origin master
+  
+  
