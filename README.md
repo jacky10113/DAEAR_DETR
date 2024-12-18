@@ -1,31 +1,31 @@
-1.Install
-1.1
+# 1.Install
+## 1.1  
 conda create -n daeardetr python=3.8 -y
-1.2
+## 1.2  
 pip install -r requirements.txt
 
-2.Train
-# training on single-gpu
+# 2.Train
+training on single-gpu
 python tools/train.py -c configs/daear_detr/daear_detr_r50vd_6x_caltechPedestrian_dualencode_level4_encodestage2_residual_AttentionGated.yml
 
-3.Test
+# 3.Test
 python tools/train.py -c configs/daear_detr/daear_detr_r50vd_6x_caltechPedestrian_dualencode_level4_encodestage2_residual_AttentionGated.yml -r ../models_trained/object_detection/daear_detr/caltechPedestrian/daear_detr_dualencode_level4_encodestage2_residual_AttentionGated_r50vd_6x_caltechPedestrian/20240920_184030/checkpoint0063.pth  --test-only
 
 #Executing the above command will generate prediction data for the test set, the file name is predictions.json
 
-4.Calculate LAMR
-4.1
+# 4.Calculate LAMR
+## 4.1  
 Modify result_jsons in tools/convert_json_to_txt.py to the real path of predictions.json
-4.2
+## 4.2  
 python tools/convert_json_to_txt.py
-4.3
+## 4.3  
 Copy the txt format data generated in the ./test_out/eval_caltech/ directory to caltech_tool to calculate LAMR and draw the corresponding curve
 
-5.Download links of  trained models and prediction  on Caltech Pedestrian Dataset(interval 30)
-5.1 DAEAR-DETR
-model https://drive.google.com/file/d/14uq3xefOhYFStYO0Hsni7xQoZ-G31S8-/view?usp=sharing
-predictions(json) https://drive.google.com/file/d/1thE7GqkTH1whf703Qcc5rMbpMpWEgrvK/view?usp=drive_link
-predictions(txt) https://drive.google.com/drive/folders/1xBex_cNNrLJxWXeZ2sPLhdLD9Yjk3NrR?usp=sharing
+# 5.Download links of  trained models and prediction  on Caltech Pedestrian Dataset(interval 30)
+## 5.1 DAEAR-DETR  
+- model https://drive.google.com/file/d/14uq3xefOhYFStYO0Hsni7xQoZ-G31S8-/view?usp=sharing
+- predictions(json) https://drive.google.com/file/d/1thE7GqkTH1whf703Qcc5rMbpMpWEgrvK/view?usp=drive_link
+- predictions(txt) https://drive.google.com/drive/folders/1xBex_cNNrLJxWXeZ2sPLhdLD9Yjk3NrR?usp=sharing
 
 5.2 Faster-RCNN
 model https://drive.google.com/file/d/1TZa6n8PwRCl-vKxvCB5UQ_5KtonbziFc/view?usp=drive_link
