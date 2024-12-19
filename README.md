@@ -22,7 +22,7 @@ Execute the following code to generate txt of the predictions
 `python tools/convert_json_to_txt.py`
 ### 4.3  
 Copy the txt format data generated in the test_out/eval_caltech/ directory to eval_caltech/CocoEvalResults/ directory  
-Execute the following code to calculate LAMR and draw the corresponding curves  
+Execute the following matlab code to calculate LAMR and draw the corresponding curves  
 `dbEval(1,'(a)'); `
 
 ## 5.Download links of  trained models and prediction  on Caltech Pedestrian Dataset(interval 30)
