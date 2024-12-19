@@ -18,9 +18,12 @@ _Executing the above command will generate prediction data for the test set, the
 ### 4.1  
 _Modify result_jsons in tools/convert_json_to_txt.py to the real path of predictions.json_
 ### 4.2  
+Execute the following code to generate txt of the predictions  
 `python tools/convert_json_to_txt.py`
 ### 4.3  
-_Copy the txt format data generated in the ./test_out/eval_caltech/ directory to caltech_tool to calculate LAMR and draw the corresponding curve_
+Copy the txt format data generated in the test_out/eval_caltech/ directory to eval_caltech/CocoEvalResults/ directory  
+Execute the following code to calculate LAMR and draw the corresponding curves  
+`dbEval(1,'(a)'); `
 
 ## 5.Download links of  trained models and prediction  on Caltech Pedestrian Dataset(interval 30)
 ### 5.1 DAEAR-DETR  
