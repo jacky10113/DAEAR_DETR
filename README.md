@@ -25,7 +25,7 @@ Copy the txt format data generated in the test_out/eval_caltech/ directory to ev
 Execute the following matlab code to calculate LAMR and draw the corresponding curves  
 `dbEval(1,'(a)'); `
 
-## 5.Download links of  trained models and prediction  on Caltech Pedestrian Dataset(interval 30)
+## 5.Download links of  trained models and prediction datas  on Caltech Pedestrian Dataset(interval 30)
 ### 5.1 DAEAR-DETR  
 - [model](https://drive.google.com/file/d/14uq3xefOhYFStYO0Hsni7xQoZ-G31S8-/view?usp=sharing)  
 - [predictions(json)](https://drive.google.com/file/d/1thE7GqkTH1whf703Qcc5rMbpMpWEgrvK/view?usp=drive_link)  
