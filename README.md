@@ -5,6 +5,7 @@ conda activate daeardetr
 ### 1.2Install dependencies
 pip install -r requirements.txt
 
+
 ## 2.Train
 __training on single-gpu__  
 `python tools/train.py -c configs/daear_detr/daear_detr_r50vd_6x_caltechPedestrian_dualencode_level4_encodestage2_residual_AttentionGated.yml`

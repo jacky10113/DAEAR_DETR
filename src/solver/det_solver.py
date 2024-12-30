@@ -77,7 +77,6 @@ class DetSolver(BaseSolver):
       # 预热GPU，避免启动CUDA时的延迟影响性能测量
       for _ in range(10):
           _ = model(dummy_input)
-      
       # 开始测试FPS
       start_time = time.time()
       for _ in range(num_frames):
